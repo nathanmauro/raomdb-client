@@ -29,9 +29,6 @@ export class HomeController {
     const movieList = this.movieLists.find(movieList => movieList.name === listName);
     const sum = _.sumBy(movieList.movies, 'rating');
     if (movieList.movies) {
-      console.log('sum', sum);
-      console.log('average', sum / movieList.movies.length);
-
       return sum / movieList.movies.length;
     }
 
