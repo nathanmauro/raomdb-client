@@ -1,4 +1,3 @@
-import {MovieList} from '../../model/movie-list.model';
 import * as _ from 'lodash';
 
 export class HomeController {
@@ -9,20 +8,14 @@ export class HomeController {
     this.factory = HomeFactory;
 
     this.newMovieListName = null;
-    this.currentMovieList = null;
   }
 
   $onInit() {
-    this.movieLists = this.factory.getMovieLists();
-    console.log('movieLists in home controller', this.movieLists);
+    this._setMovieLists();
   }
 
   createNewMovieList(newMovieListName) {
-    this.factory.createNewMovieList(new MovieList(newMovieListName))
-      .then(response => {
-        this.movieLists = response.data;
-        console.log('movieLists', response.data);
-      });
+    this.factory.createNewMovieList(newMovieListName).then(() => this._setMovieLists());
   }
 
   calculateAverageRating(listName) {
@@ -35,7 +28,8 @@ export class HomeController {
     return null;
   }
 
-  setCurrentMovieList(list) {
-    this.currentMovieList = list;
+  _setMovieLists() {
+    this.movieLists = this.factory.getMovieLists();
+    console.log('movieLists in home controller', this.movieLists);
   }
 }

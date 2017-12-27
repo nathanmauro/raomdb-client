@@ -1,4 +1,5 @@
 export const MovieFactory = ($q, $http, $log) => {
+  // noinspection BadExpressionStatementJS
   'ngInject';
 
   let requirements = [];

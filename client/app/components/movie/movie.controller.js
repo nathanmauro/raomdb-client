@@ -18,10 +18,19 @@ export class MovieController {
     this.factory.saveMovie(this.movie).then(response => {
       const movie = response.data;
       console.log('movie saved!!', movie);
-      this.state.reload('home').then(() => {
-        this.state.transitionTo('home.movieList', {listName: movie.listName});
-      });
+      this._reloadState();
     });
   }
+
+  // region util
+
+  _reloadState() {
+    this.state.reload('home').then(() => {
+      console.log('this.state.params.listName', this.state.params.listName);
+      this.state.transitionTo('home.movieList', {listName: this.state.params.listName});
+    });
+  }
+
+  // endregion util
 
 }
