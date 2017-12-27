@@ -4,7 +4,7 @@
   <div class="row">
     <ul ng-repeat="movie in $ctrl.moviesInMovieList">
       <li ng-if="$ctrl.moviesInMovieList.length > 0">
-        <a ui-sref="home.movie({imdbId: movie.imdbId})" style="width: 100%;">
+        <a ui-sref="home.movie({imdbId: movie.imdbId, listName: $ctrl.state.params.listName})" style="width: 100%;">
           {{movie.name}} (rating: {{movie.rating}}/5)
         </a>
       </li>
@@ -29,8 +29,16 @@
   </div>
   <div class="row">
     <ul ng-repeat="movie in $ctrl.movieTitleSearchResults">
-      <li>{{movie.name}}
-        <button class="btn btn-default" ng-click="$ctrl.addToMovieList(movie)">Add</button>
+      <li>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="input-group">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" ng-click="$ctrl.addToMovieList(movie)">Add</button>
+               </span>
+              <label class="form-control" style="background: beige;">{{movie.name}}</label>
+            </div>
+          </div>
       </li>
     </ul>
   </div>
@@ -38,6 +46,6 @@
 <hr>
 
 <!--<div ng-if="$ctrl.editMode">-->
-  <!--<movie movie=""></movie>-->
+<!--<movie movie=""></movie>-->
 <!--</div>-->
 <!--<ui-view></ui-view>-->
