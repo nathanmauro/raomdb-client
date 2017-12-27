@@ -1,0 +1,35 @@
+<navbar></navbar>
+
+<div class="container">
+  <!-- could be own directive -->
+  <h3>Create New Movie List</h3>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="input-group">
+        <input type="text"
+               class="form-control"
+               placeholder="New movie list name here..."
+               ng-model="$ctrl.newMovieListName">
+        <span class="input-group-btn">
+          <button class="btn btn-primary"
+                  type="button"
+                  ng-click="$ctrl.createNewMovieList($ctrl.newMovieListName)">Create</button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- could be own directive -->
+  <h5>Movie Lists</h5>
+  <ul ng-repeat="list in $ctrl.movieLists">
+    <li>
+      <a ui-sref="home.movieList({listName: list.name})" ng-click="$ctrl.setCurrentMovieList(list)">
+        {{list.name}}
+      </a>
+      <p>number of movies: {{list.movies.length}}, average rating: {{$ctrl.calculateAverageRating(list.name)}}</p>
+    </li>
+  </ul>
+</div>
+<hr>
+
+<ui-view></ui-view>
