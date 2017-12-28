@@ -11,8 +11,6 @@ export class MovieListController {
 
     this.movieList = null;
     this.moviesInMovieList = [];
-
-    this.editMode = false;
   }
 
   $onInit() {
@@ -34,17 +32,18 @@ export class MovieListController {
    * @param {Movie} movie
    */
   addToMovieList(movie) {
-    movie.listName = this.state.params.listName;
-
-    this.factory.addToMovieList(movie);
-
-    this.moviesInMovieList.push(movie);
+    this.factory.addToMovieList(movie, this.state.params.listName).then(resolvedResponse => {
+      console.log('resolvedResponse', resolvedResponse);
+      this.moviesInMovieList = resolvedResponse;
+    });
     this._removeMovieFromSearchResults(movie);
   }
 
   // region util
+
   _removeMovieFromSearchResults(movie) {
     this.movieTitleSearchResults = this.movieTitleSearchResults.filter(movieInList => movieInList.name !== movie.name);
   }
+
   // endregion util
 }

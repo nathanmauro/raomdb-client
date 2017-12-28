@@ -6,6 +6,7 @@ const homeModule = angular.module('home', [
   uiRouter
 ]);
 homeModule.config(($stateProvider, $urlRouterProvider) => {
+  // noinspection BadExpressionStatementJS
   'ngInject';
 
   $urlRouterProvider.otherwise('/');

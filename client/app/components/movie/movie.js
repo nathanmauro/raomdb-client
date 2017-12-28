@@ -6,11 +6,15 @@ const movieModule = angular.module('movie', [
   uiRouter
 ]);
 movieModule.config(($stateProvider) => {
+  // noinspection BadExpressionStatementJS
   'ngInject';
 
   $stateProvider
     .state('home.movie', {
       url: 'movie/{imdbId:string}',
+      params: {
+        listName: null
+      },
       component: 'movie',
       resolve: {
         movie: (MovieFactory, $stateParams) => {

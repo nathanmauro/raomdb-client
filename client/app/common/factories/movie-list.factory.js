@@ -1,6 +1,7 @@
 import {Movie} from '../../model/movie.model';
 
 export const MovieListFactory = ($q, $http, $log) => {
+  // noinspection BadExpressionStatementJS
   'ngInject';
 
   let movieList = null;
@@ -46,13 +47,17 @@ export const MovieListFactory = ($q, $http, $log) => {
   /**
    * Add to existing movie list.
    * @param {Movie} movie
+   * @param {string} listName
    */
-  const addToMovieList = (movie) => {
+  const addToMovieList = (movie, listName) => {
     addedToMovieListDeferred = $q.defer();
 
-    $http.post("/rest/movielist/add", movie).then(response => {
+    $http.post("/rest/movielist/" + listName, movie).then(response => {
       console.log('added to movie list in movie list factory', response.data);
-    })
+      addedToMovieListDeferred.resolve(response.data);
+    });
+
+    return addedToMovieListDeferred.promise;
   };
 
   return {
