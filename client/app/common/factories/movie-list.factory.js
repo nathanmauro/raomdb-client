@@ -54,7 +54,10 @@ export const MovieListFactory = ($q, $http, $log) => {
 
     $http.post("/rest/movielist/" + listName, movie).then(response => {
       console.log('added to movie list in movie list factory', response.data);
-    })
+      addedToMovieListDeferred.resolve(response.data);
+    });
+
+    return addedToMovieListDeferred.promise;
   };
 
   return {
