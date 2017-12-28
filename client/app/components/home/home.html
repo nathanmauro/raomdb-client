@@ -11,7 +11,8 @@
         <span class="input-group-btn">
           <button class="btn btn-primary"
                   type="button"
-                  ng-click="$ctrl.createNewMovieList($ctrl.newMovieListName)">Create</button>
+                  ng-click="$ctrl.createNewMovieList($ctrl.newMovieListName)"
+                  ng-disabled="!$ctrl.hasInput($ctrl.newMovieListName)">Create</button>
         </span>
       </div>
     </div>
