@@ -6,6 +6,7 @@ const movieListModule = angular.module('movieList', [
   uiRouter
 ]);
 movieListModule.config(($stateProvider) => {
+  // noinspection BadExpressionStatementJS
   'ngInject';
 
   $stateProvider
