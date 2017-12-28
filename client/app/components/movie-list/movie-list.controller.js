@@ -32,9 +32,10 @@ export class MovieListController {
    * @param {Movie} movie
    */
   addToMovieList(movie) {
-    this.factory.addToMovieList(movie, this.state.params.listName);
-
-    this.moviesInMovieList.push(movie);
+    this.factory.addToMovieList(movie, this.state.params.listName).then(resolvedResponse => {
+      console.log('resolvedResponse', resolvedResponse);
+      this.moviesInMovieList = resolvedResponse;
+    });
     this._removeMovieFromSearchResults(movie);
   }
 
