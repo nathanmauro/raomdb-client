@@ -28,6 +28,10 @@ export class HomeController {
     return null;
   }
 
+  hasInput(input) {
+    return _.isString(input) && !_.isEmpty(input);
+  }
+
   _setMovieLists() {
     this.movieLists = this.factory.getMovieLists();
     console.log('movieLists in home controller', this.movieLists);

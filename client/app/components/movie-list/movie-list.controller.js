@@ -32,14 +32,27 @@ export class MovieListController {
    * @param {Movie} movie
    */
   addToMovieList(movie) {
-    this.factory.addToMovieList(movie, this.state.params.listName).then(resolvedResponse => {
-      console.log('resolvedResponse', resolvedResponse);
-      this.moviesInMovieList = resolvedResponse;
-    });
+    if (this._notInMoviesInMovieList(movie)) {
+      this.factory.addToMovieList(movie, this.state.params.listName).then(resolvedResponse => {
+        console.log('resolvedResponse', resolvedResponse);
+        this.moviesInMovieList = resolvedResponse;
+      });
+
+    }
     this._removeMovieFromSearchResults(movie);
   }
 
   // region util
+
+  /**
+   * Determines if the movie is not in the movie list
+   * @param {Movie} movie
+   * @private
+   * @return {boolean} true if the move is not in the movie list
+   */
+  _notInMoviesInMovieList(movie) {
+    return !_.some(this.moviesInMovieList, (m) => m.imdbId === movie.imdbId);
+  }
 
   _removeMovieFromSearchResults(movie) {
     this.movieTitleSearchResults = this.movieTitleSearchResults.filter(movieInList => movieInList.name !== movie.name);
